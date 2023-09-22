@@ -9,7 +9,7 @@
 		<version>3.1.3</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>br.com.giulianabezerra</groupId>
+	<groupId>com.ffs</groupId>
 	<artifactId>place-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>place-service</name>

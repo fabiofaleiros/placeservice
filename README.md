@@ -60,7 +60,7 @@ O Swagger poderá ser visualizado em [localhost:8080/swagger-ui.html](http://loc
 ```
 - Executar o container:
 ```
-docker run --name placeservice -p 8080:8080  -d placeservice:0.0.1-SNAPSHOT
+docker run --name place-service -p 8080:8080  -d place-service:0.0.1-SNAPSHOT
 ```
 
 A API poderá ser acessada em [localhost:8080](http://localhost:8080).
