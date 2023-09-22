@@ -1,6 +1,10 @@
 package com.ffs.placeservice;
 
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
@@ -12,6 +16,8 @@ import com.ffs.placeservice.domain.Place;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @Import(TestConfig.class)
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class PlaceServiceTests {
 
 	public static final Place CENTRAL_PARK = new Place(1L, "Central Park", "central-park", "NY", "NY", null, null);
@@ -19,6 +25,7 @@ class PlaceServiceTests {
 	@Autowired
 	private WebTestClient webTestClient;
 
+	@Order(1)
 	@Test
 	public void testCreatePlaceSucess() {
 		final String name = "Valid Name";
@@ -40,6 +47,7 @@ class PlaceServiceTests {
 				.jsonPath("updatedAt").isNotEmpty();
 	}
 
+	@Order(2)
 	@Test
 	public void testCreatePlaceFailure() {
 		final String name = "";
@@ -54,6 +62,7 @@ class PlaceServiceTests {
 			.expectStatus().isBadRequest();
 	}
 
+	@Order(3)
 	@Test
 	public void testEditPlaceSuccess() {
 		final String newName = "New Name";
@@ -122,6 +131,7 @@ class PlaceServiceTests {
 			.jsonPath("updatedAt").isNotEmpty();
 	}
 
+	@Order(4)
 	@Test
 	public void testGetSuccess() {
 		webTestClient
@@ -137,6 +147,7 @@ class PlaceServiceTests {
 			.jsonPath("updatedAt").isNotEmpty();
 	}
 
+	@Order(5)
 	@Test
 	public void testGetFailure() {
 		webTestClient
@@ -146,6 +157,7 @@ class PlaceServiceTests {
 			.expectStatus().isNotFound();
 	}
 
+	@Order(6)
 	@Test
 	public void testListAllSuccess() {
 		webTestClient
@@ -162,6 +174,7 @@ class PlaceServiceTests {
 			.jsonPath("$[0].updatedAt").isNotEmpty();
 	}
 
+	@Order(7)
 	@Test
 	public void testListByNameSuccess() {
 		webTestClient
@@ -178,6 +191,7 @@ class PlaceServiceTests {
 			.jsonPath("$[0].updatedAt").isNotEmpty();
 	}
 
+	@Order(8)
 	@Test
 	public void testListByNameNotFound() {
 		webTestClient
