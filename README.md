@@ -60,7 +60,7 @@ O Swagger poderá ser visualizado em [localhost:8080/swagger-ui.html](http://loc
 ```
 - Executar o container:
 ```
-docker run --name place-service -p 8080:8080  -d place-service:0.0.1-SNAPSHOT
+docker run --name placeservice -p 8080:8080  -d placeservice:0.0.1-SNAPSHOT
 ```
 
 A API poderá ser acessada em [localhost:8080](http://localhost:8080).
@@ -68,71 +68,98 @@ O Swagger poderá ser visualizado em [localhost:8080/swagger-ui.html](http://loc
 
 ## API Endpoints
 
-Para fazer as requisições HTTP abaixo, foi utilizada a ferramenta [httpie](https://httpie.io):
+Para fazer as requisições HTTP abaixo, foi utilizada a ferramenta [postman](https://www.postman.com/):
 
-- POST /places
+- POST localhost:8080/places
 ```
-http POST :8080/places name="Place" state="State"
+Request:
+{
+    "name": "New One",
+    "city": "New City",
+    "state": "New State"
+}
 
-HTTP/1.1 200 OK
-Content-Length: 129
+HTTP/1.1 201 CREATED
 Content-Type: application/json
 
 {
-    "createdAt": "2023-04-20T19:00:07.241632",
-    "name": "Place",
-    "slug": "place",
-    "state": "State",
-    "updatedAt": "2023-04-20T19:00:07.241632"
+    "name": "New One",
+    "slug": "new-one",
+    "city": "New State",
+    "state": "New City",
+    "createdAt": "2023-09-22T18:19:54.1250719",
+    "updatedAt": "2023-09-22T18:19:54.1250719"
 }
 ```
 
-- GET /places/{id}
+- GET localhost:8080/places
 ```
-http :8080/places/1
 HTTP/1.1 200 OK
-Content-Length: 129
+Content-Type: application/json
+
+[
+    {
+        "name": "New One",
+        "slug": "new-one",
+        "city": "New State",
+        "state": "New City",
+        "createdAt": "2023-09-22T18:19:27.476613",
+        "updatedAt": "2023-09-22T18:19:27.476613"
+    }
+]
+```
+
+- GET localhost:8080/places/1
+```
+HTTP/1.1 200 OK
 Content-Type: application/json
 
 {
-    "createdAt": "2023-06-07T14:45:39.693689",
-    "name": "Place",
-    "slug": "place",
-    "state": "State",
-    "updatedAt": "2023-06-07T14:45:39.693689"
+    "name": "New One",
+    "slug": "new-one",
+    "city": "New State",
+    "state": "New City",
+    "createdAt": "2023-09-22T18:19:27.476613",
+    "updatedAt": "2023-09-22T18:19:27.476613"
 } 
 ```
 
-- GET /places?name=?
+- GET localhost:8080/places?name=New One
 ```
-http :8080/places name==PLACE
 HTTP/1.1 200 OK
 Content-Type: application/json
 transfer-encoding: chunked
 
 [
     {
-        "createdAt": "2023-06-07T14:45:39.693689",
-        "name": "Place",
-        "slug": "place",
-        "state": "State",
-        "updatedAt": "2023-06-07T14:45:39.693689"
+        "name": "New One",
+        "slug": "new-one",
+        "city": "New State",
+        "state": "New City",
+        "createdAt": "2023-09-22T18:19:27.476613",
+        "updatedAt": "2023-09-22T18:19:27.476613"
     }
 ]
 ```
 
-- PATCH /places/{id}
+- PATCH localhost:8080/places/1
 ```
-http PATCH :8080/places/1 name='New Name' state='New State'
-HTTP/1.1 200 OK
-Content-Length: 142
+Request:
+{
+    "name": "New One Name",
+    "city": "New City Name",
+    "state": "New State Name"
+}
+
+HTTP/1.1 200 CREATED
 Content-Type: application/json
 
 {
-    "createdAt": "2023-06-07T14:45:39.693689",
-    "name": "New Name",
-    "slug": "new-name",
-    "state": "New State",
-    "updatedAt": "2023-06-07T14:53:21.671129345"
+    "name": "New One Name",
+    "slug": "new-one-name",
+    "city": "New State Name",
+    "state": "New City Name",
+    "createdAt": "2023-09-22T18:19:27.476613",
+    "updatedAt": "2023-09-22T18:31:13.3329751"
 }
 ```
