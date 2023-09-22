@@ -163,3 +163,25 @@ Content-Type: application/json
     "updatedAt": "2023-09-22T18:31:13.3329751"
 }
 ```
+
+- PUT localhost:8080/places/1
+```
+Request:
+{
+    "name": "New One Name",
+    "city": "New City Name",
+    "state": "New State Name"
+}
+
+HTTP/1.1 200 CREATED
+Content-Type: application/json
+
+{
+    "name": "New One Name",
+    "slug": "new-one-name",
+    "city": "New State Name",
+    "state": "New City Name",
+    "createdAt": "2023-09-22T18:19:27.476613",
+    "updatedAt": "2023-09-22T18:31:13.3329751"
+}
+```
